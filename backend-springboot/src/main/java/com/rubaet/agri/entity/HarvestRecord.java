@@ -20,7 +20,7 @@ public class HarvestRecord {
     @Column(length = 60)
     private String season;
 
-    @Column(nullable = false)
+    @Column(name = "harvest_year", nullable = false)
     private int year;
 
     @Column(name = "actual_yield_kg", nullable = false)

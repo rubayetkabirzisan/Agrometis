@@ -3,18 +3,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-
-
 # Ignore H2 Database files
 *.mv.db
 *.trace.db
 
-
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -44,12 +38,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-### Custom Rules ###
-CSVFILES/ArifCSVFiles/contacts.csv
-next30days.json
-.idea/misc.xml
-.idea/encodings.xml
-.idea/uiDesigner.xml
-.idea/
-# Ignore secrets file
+### Secrets ###
 backend-springboot/secrets.properties

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+  Weather.fxml — Weather Dashboard
+  Controller: com.rubaet.agrihub.ui.weather.WeatherController
+  All fx:id bindings PRESERVED: readCity, city, country, date, day, time,
+    temperature, pressure, humidity, wind, visibility, description, showerror
+  Navigation: homeBtn() called via Back button (was ImageView click)
+-->
+<BorderPane
+    prefWidth="1100.0"
+    prefHeight="700.0"
+    styleClass="app-root"
+    stylesheets="@../styles/application.css"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.rubaet.agrihub.ui.weather.WeatherController">
+
+    <!-- ── TOP BAR ── -->
+    <top>
+        <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+            <!-- Back / Home button -->
+            <Button
+                text="← Back"
+                styleClass="btn-ghost"
+                onAction="#homeBtn"
+                mnemonicParsing="false" />
+            <Label text="🌤️" style="-fx-font-size: 18px;" />
+            <Label text="Weather Dashboard" styleClass="text-page-title" />
+            <Region HBox.hgrow="ALWAYS" />
+            <!-- Search row -->
+            <TextField
+                fx:id="readCity"
+                styleClass="search-box"
+                promptText="Enter city name (e.g. Dhaka)"
+                prefWidth="260" />
+            <Button
+                text="Search"
+                styleClass="btn-primary"
+                onAction="#button"
+                mnemonicParsing="false" />
+        </HBox>
+    </top>
+
+    <!-- ── CENTER: Weather Data ── -->
+    <center>
+        <ScrollPane styleClass="scroll-area" fitToWidth="true">
+        <VBox spacing="24" style="-fx-padding: 32 48 32 48;">
+
+            <!-- Navigation row -->
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Button
+                    text="◀ Previous"
+                    styleClass="btn-ghost"
+                    onAction="#prevday"
+                    mnemonicParsing="false" />
+                <Button
+                    text="Next ▶"
+                    styleClass="btn-ghost"
+                    onAction="#nextday"
+                    mnemonicParsing="false" />
+                <!-- Error message shown inline -->
+                <Label
+                    fx:id="showerror"
+                    styleClass="text-error"
+                    wrapText="true"
+                    maxWidth="500" />
+            </HBox>
+
+            <!-- Stat card grid (3 columns) -->
+            <GridPane hgap="16" vgap="16">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.33" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="110" />
+                    <RowConstraints minHeight="110" />
+                    <RowConstraints minHeight="110" />
+                </rowConstraints>
+
+                <!-- Row 0: Location info -->
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="📍 City" styleClass="text-muted" />
+                    <Label fx:id="city" styleClass="text-section" />
+                </VBox>
+
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="🏳️ Country" styleClass="text-muted" />
+                    <Label fx:id="country" styleClass="text-section" />
+                </VBox>
+
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="6" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <Label text="🌥️ Conditions" styleClass="text-muted" />
+                    <Label fx:id="description" styleClass="text-section" />
+                </VBox>
+
+                <!-- Row 1: Atmospheric data -->
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="🌡️ Temperature" styleClass="text-muted" />
+                    <Label fx:id="temperature" styleClass="text-section" />
+                    <Label text="°C" styleClass="text-small" />
+                </VBox>
+
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="💧 Humidity" styleClass="text-muted" />
+                    <Label fx:id="humidity" styleClass="text-section" />
+                    <Label text="\%" styleClass="text-small" />
+                </VBox>
+
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <Label text="📊 Pressure" styleClass="text-muted" />
+                    <Label fx:id="pressure" styleClass="text-section" />
+                    <Label text="hPa" styleClass="text-small" />
+                </VBox>
+
+                <!-- Row 2: Movement data + time -->
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                    <Label text="💨 Wind Speed" styleClass="text-muted" />
+                    <Label fx:id="wind" styleClass="text-section" />
+                    <Label text="m/s" styleClass="text-small" />
+                </VBox>
+
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label text="👁️ Visibility" styleClass="text-muted" />
+                    <Label fx:id="visibility" styleClass="text-section" />
+                    <Label text="m" styleClass="text-small" />
+                </VBox>
+
+                <VBox styleClass="stat-card" alignment="CENTER" spacing="6" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <Label text="📅 Date &amp; Day" styleClass="text-muted" />
+                    <Label fx:id="day" styleClass="text-section" />
+                    <Label fx:id="date" styleClass="text-small" />
+                    <Label fx:id="time" styleClass="text-small" />
+                </VBox>
+
+            </GridPane>
+        </VBox>
+        </ScrollPane>
+    </center>
+
+    <!--
+      HIDDEN NODE — required for @FXML controller binding.
+      WeatherController declares: @FXML private ImageView weatherHomelogo;
+      and uses it as: (Stage) weatherHomelogo.getScene().getWindow()
+      Must remain an ImageView type. managed=false ensures zero layout impact.
+    -->
+    <bottom>
+        <ImageView fx:id="weatherHomelogo" managed="false" visible="false" />
+    </bottom>
+
+</BorderPane>

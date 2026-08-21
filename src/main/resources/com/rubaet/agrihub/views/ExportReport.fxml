@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+    prefWidth="1200.0" prefHeight="760.0"
+    styleClass="app-root"
+    stylesheets="@../styles/application.css"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.rubaet.agrihub.ui.report.ExportReportController">
+
+    <!-- ── TOP BAR ── -->
+    <top>
+        <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+            <Button text="← Back" styleClass="btn-ghost" onAction="#goHome" mnemonicParsing="false" />
+            <Label text="📤" style="-fx-font-size: 20px;" />
+            <VBox spacing="2">
+                <Label text="Export Farm Report" styleClass="text-page-title" />
+                <Label text="Generate and download a comprehensive farm summary." styleClass="text-muted" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="statusLabel" text="" styleClass="text-success" />
+        </HBox>
+    </top>
+
+    <!-- ── CENTER ── -->
+    <center>
+        <ScrollPane styleClass="scroll-area" fitToWidth="true">
+            <VBox spacing="24" style="-fx-padding: 32 48 32 48;" maxWidth="900" alignment="CENTER_LEFT">
+
+                <!-- Info Card -->
+                <VBox styleClass="card" spacing="12" style="-fx-border-color: #0ea5e940;">
+                    <Label text="📋 What's in the report?" styleClass="text-section" />
+                    <Label wrapText="true" styleClass="text-body"
+                           text="Your farm report includes:" />
+                    <VBox spacing="6" style="-fx-padding: 0 0 0 16;">
+                        <Label text="• Farm Profile — name, location, soil type, area" styleClass="text-muted" />
+                        <Label text="• Harvest History — all recorded yields and revenue" styleClass="text-muted" />
+                        <Label text="• Financial Summary — totals and per-crop breakdown" styleClass="text-muted" />
+                    </VBox>
+                </VBox>
+
+                <!-- Action Buttons -->
+                <HBox spacing="16" alignment="CENTER_LEFT">
+                    <Button fx:id="previewBtn" text="👁  Preview Report" styleClass="btn-secondary"
+                            onAction="#previewReport" prefWidth="200" mnemonicParsing="false" />
+                    <Button fx:id="exportBtn" text="💾  Download Report" styleClass="btn-primary"
+                            onAction="#exportReport" prefWidth="200" mnemonicParsing="false" />
+                </HBox>
+
+                <!-- Preview Area -->
+                <TextArea fx:id="previewArea" styleClass="chat-area" VBox.vgrow="ALWAYS"
+                          editable="false" wrapText="true" prefRowCount="20"
+                          style="-fx-font-family: 'Monospaced'; -fx-font-size: 13px;" />
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

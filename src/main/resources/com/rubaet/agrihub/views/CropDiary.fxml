@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+    prefWidth="1200.0" prefHeight="760.0"
+    styleClass="app-root"
+    stylesheets="@../styles/application.css"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.rubaet.agrihub.ui.diary.CropDiaryController">
+
+    <!-- ── TOP BAR ── -->
+    <top>
+        <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+            <Button text="← Back" styleClass="btn-ghost" onAction="#goHome" mnemonicParsing="false" />
+            <Label text="📓" style="-fx-font-size: 20px;" />
+            <VBox spacing="2">
+                <Label text="Crop Diary" styleClass="text-page-title" />
+                <Label text="Track your crop cycles and daily farming activities." styleClass="text-muted" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="statusLabel" text="" styleClass="text-success" />
+        </HBox>
+    </top>
+
+    <!-- ── CENTER ── -->
+    <center>
+        <ScrollPane styleClass="scroll-area" fitToWidth="true" fitToHeight="true">
+            <HBox spacing="0">
+
+                <!-- LEFT: Create + List -->
+                <VBox spacing="20"
+                      style="-fx-padding: 24; -fx-pref-width: 420; -fx-min-width: 360;
+                             -fx-background-color: #0d1117; -fx-border-color: transparent #30363d transparent transparent;
+                             -fx-border-width: 0 1 0 0;">
+
+                    <!-- Create Cycle Form -->
+                    <VBox styleClass="card" spacing="14">
+                        <Label text="🌱 New Crop Cycle" styleClass="text-section" />
+                        <VBox spacing="6">
+                            <Label text="Crop Name *" styleClass="text-muted" />
+                            <TextField fx:id="cropNameField" styleClass="field-input" promptText="e.g. Rice, Wheat..." />
+                        </VBox>
+                        <HBox spacing="12">
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Season" styleClass="text-muted" />
+                                <TextField fx:id="seasonField" styleClass="field-input" promptText="e.g. Monsoon 2026" />
+                            </VBox>
+                            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                <Label text="Start Date *" styleClass="text-muted" />
+                                <DatePicker fx:id="startDatePicker" styleClass="combo-field" maxWidth="Infinity" />
+                            </VBox>
+                        </HBox>
+                        <VBox spacing="6">
+                            <Label text="Notes" styleClass="text-muted" />
+                            <TextArea fx:id="notesField" styleClass="chat-area" prefRowCount="2" promptText="Optional notes..." />
+                        </VBox>
+                        <Button fx:id="createCycleBtn" text="🌱  Create Cycle" styleClass="btn-primary"
+                                onAction="#createCycle" maxWidth="Infinity" mnemonicParsing="false" />
+                    </VBox>
+
+                    <!-- Cycle List -->
+                    <Label text="Your Crop Cycles" styleClass="text-section" />
+                    <VBox fx:id="cycleListBox" spacing="10">
+                        <Label text="Loading..." styleClass="text-muted" />
+                    </VBox>
+                </VBox>
+
+                <!-- RIGHT: Activity Log -->
+                <VBox fx:id="activityPanel" spacing="20" style="-fx-padding: 24;" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+                    <Label fx:id="selectedCycleLabel" text="Select a cycle to view activities" styleClass="text-section" />
+
+                    <!-- Log Activity Form -->
+                    <VBox styleClass="card" spacing="12">
+                        <Label text="📝 Log Activity" styleClass="text-card-title" />
+                        <HBox spacing="12">
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="Type *" styleClass="text-muted" />
+                                <TextField fx:id="activityTypeField" styleClass="field-input" promptText="Planting, Watering, Fertilizing..." />
+                            </VBox>
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="Cost ($)" styleClass="text-muted" />
+                                <TextField fx:id="activityCostField" styleClass="field-input" promptText="0.00" />
+                            </VBox>
+                        </HBox>
+                        <VBox spacing="4">
+                            <Label text="Description" styleClass="text-muted" />
+                            <TextField fx:id="activityDescField" styleClass="field-input" promptText="Optional details..." />
+                        </VBox>
+                        <Button text="📝  Log Activity" styleClass="btn-accent" onAction="#logActivity" maxWidth="Infinity" mnemonicParsing="false" />
+                    </VBox>
+
+                    <!-- Activity History -->
+                    <Label text="Activity History" styleClass="text-card-title" />
+                    <VBox fx:id="activityListBox" spacing="0">
+                        <Label text="Select a cycle to see its activities." styleClass="text-muted" />
+                    </VBox>
+                </VBox>
+
+            </HBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

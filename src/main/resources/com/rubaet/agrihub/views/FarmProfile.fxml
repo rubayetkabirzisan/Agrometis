@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+    prefWidth="1200.0"
+    prefHeight="760.0"
+    styleClass="app-root"
+    stylesheets="@../styles/application.css"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.rubaet.agrihub.ui.profile.FarmProfileController">
+
+    <!-- ── TOP BAR ── -->
+    <top>
+        <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+            <Button text="← Back" styleClass="btn-ghost" onAction="#goHome" mnemonicParsing="false" />
+            <Label text="🏡" style="-fx-font-size: 20px;" />
+            <VBox spacing="2">
+                <Label text="My Farm Profile" styleClass="text-page-title" />
+                <Label text="Your farm details are shared automatically with AgriBot." styleClass="text-muted" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="statusBadge" text="" styleClass="badge-success" />
+        </HBox>
+    </top>
+
+    <!-- ── CENTER ── -->
+    <center>
+        <ScrollPane styleClass="scroll-area" fitToWidth="true" fitToHeight="false">
+            <VBox spacing="28" style="-fx-padding: 32 40 32 40;" maxWidth="800">
+
+                <!-- ── Farm Identity Card ── -->
+                <VBox styleClass="card-animated" spacing="20">
+                    <Label text="Farm Identity" styleClass="text-section" />
+                    <HBox spacing="20">
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Farm Name" styleClass="text-muted" />
+                            <TextField fx:id="farmNameField" styleClass="field-input" promptText="e.g. Green Valley Farm" HBox.hgrow="ALWAYS" />
+                        </VBox>
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Region / District" styleClass="text-muted" />
+                            <TextField fx:id="regionField" styleClass="field-input" promptText="e.g. Dhaka, Rajshahi..." />
+                        </VBox>
+                    </HBox>
+                    <VBox spacing="6">
+                        <Label text="Location / Address" styleClass="text-muted" />
+                        <TextField fx:id="locationField" styleClass="field-input" promptText="e.g. Comilla, Bangladesh" maxWidth="Infinity" />
+                    </VBox>
+                </VBox>
+
+                <!-- ── Farm Characteristics Card ── -->
+                <VBox styleClass="card-animated" spacing="20">
+                    <Label text="Farm Characteristics" styleClass="text-section" />
+                    <HBox spacing="20">
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Soil Type" styleClass="text-muted" />
+                            <TextField fx:id="soilTypeField" styleClass="field-input" promptText="e.g. Clay, Sandy, Loamy..." />
+                        </VBox>
+                        <VBox spacing="6" HBox.hgrow="ALWAYS">
+                            <Label text="Total Area (Hectares)" styleClass="text-muted" />
+                            <TextField fx:id="areaField" styleClass="field-input" promptText="e.g. 5.5" />
+                        </VBox>
+                    </HBox>
+                    <VBox spacing="6">
+                        <Label text="Primary Crops (comma-separated)" styleClass="text-muted" />
+                        <TextField fx:id="primaryCropsField" styleClass="field-input" promptText="e.g. Rice, Wheat, Jute" maxWidth="Infinity" />
+                    </VBox>
+                </VBox>
+
+                <!-- ── Save Button + Result Label ── -->
+                <HBox alignment="CENTER_LEFT" spacing="16">
+                    <Button
+                        fx:id="saveBtn"
+                        text="💾  Save Profile"
+                        styleClass="btn-primary"
+                        onAction="#saveProfile"
+                        prefWidth="200"
+                        mnemonicParsing="false" />
+                    <Label fx:id="resultLabel" text="" styleClass="text-muted" wrapText="true" />
+                </HBox>
+
+                <!-- ── Info Box ── -->
+                <VBox styleClass="card" spacing="8" style="-fx-border-color: #22c55e40;">
+                    <Label text="ℹ️  How this works" styleClass="text-card-title" />
+                    <Label wrapText="true" styleClass="text-muted"
+                           text="Once saved, AgriBot automatically knows your farm's soil type, location, and crops. You will never need to re-type this information when asking questions in the AI Hub." />
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

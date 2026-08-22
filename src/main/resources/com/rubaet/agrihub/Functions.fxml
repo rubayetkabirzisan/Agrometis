@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane
+    prefWidth="1200.0"
+    prefHeight="760.0"
+    styleClass="app-root"
+    stylesheets="@styles/application.css"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.rubaet.agrihub.Functions">
+
+    <!-- ── TOP BAR ── -->
+    <top>
+        <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+            <Label text="🌿" style="-fx-font-size: 22px;" />
+            <Label text="Agri-Hub" styleClass="app-logo" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="👤" style="-fx-font-size: 14px;" />
+            <Label fx:id="userEmailLabel" styleClass="text-muted" />
+        </HBox>
+    </top>
+
+    <!-- ── CENTER: Dashboard Grid ── -->
+    <center>
+        <ScrollPane styleClass="scroll-area" fitToWidth="true" fitToHeight="true">
+            <VBox alignment="CENTER" spacing="36" style="-fx-padding: 40 60 40 60;">
+
+                <!-- Page heading -->
+                <VBox alignment="CENTER" spacing="8">
+                    <Label text="What would you like to do today?" styleClass="text-page-title" />
+                    <Label text="Select a module to get started with your farm management." styleClass="text-muted" />
+                </VBox>
+
+                <!-- 8-card responsive grid -->
+                <FlowPane
+                    alignment="CENTER"
+                    hgap="24"
+                    vgap="24"
+                    prefWrapLength="900">
+
+                    <!-- Weather Dashboard -->
+                    <VBox styleClass="nav-card-animated" alignment="CENTER" spacing="12">
+                        <Label text="🌤️" styleClass="nav-card-icon" />
+                        <Label text="Weather Dashboard" styleClass="nav-card-title" />
+                        <Label text="Live forecasts tailored for your farm location." styleClass="nav-card-subtitle" maxWidth="180" wrapText="true" />
+                        <Button text="Open" styleClass="btn-secondary" onAction="#weatherBtn" maxWidth="140" mnemonicParsing="false" />
+                    </VBox>
+
+                    <!-- AI Assistant Hub -->
+                    <VBox styleClass="nav-card-animated" alignment="CENTER" spacing="12">
+                        <Label text="🤖" styleClass="nav-card-icon" />
+                        <Label text="AI Assistant Hub" styleClass="nav-card-title" />
+                        <Label text="Crop planning, disease ID, and expert farming advice." styleClass="nav-card-subtitle" maxWidth="180" wrapText="true" />
+                        <Button text="Open" styleClass="btn-accent" onAction="#askAiBtn" maxWidth="140" mnemonicParsing="false" />
+                    </VBox>
+
+                    <!-- My Farm Profile -->
+                    <VBox styleClass="nav-card-animated" alignment="CENTER" spacing="12">
+                        <Label text="🏡" styleClass="nav-card-icon" />
+                        <Label text="My Farm Profile" styleClass="nav-card-title" />
+                        <Label text="Set your farm details so AgriBot knows your context." styleClass="nav-card-subtitle" maxWidth="180" wrapText="true" />
+                        <Button text="Open" styleClass="btn-secondary" onAction="#farmProfileBtn" maxWidth="140" mnemonicParsing="false" />
+                    </VBox>
+
+                    <!-- Yield Analytics -->
+                    <VBox styleClass="nav-card-animated" alignment="CENTER" spacing="12">
+                        <Label text="📈" styleClass="nav-card-icon" />
+                        <Label text="Yield Analytics" styleClass="nav-card-title" />
+                        <Label text="Estimate yield, revenue, and profit for your crops." styleClass="nav-card-subtitle" maxWidth="180" wrapText="true" />
+                        <Button text="Open" styleClass="btn-secondary" onAction="#analyticsBtn" maxWidth="140" mnemonicParsing="false" />
+                    </VBox>
+
+                    <!-- NEW: Crop Diary -->
+                    <VBox styleClass="nav-card-animated" alignment="CENTER" spacing="12">
+                        <Label text="📓" styleClass="nav-card-icon" />
+                        <Label text="Crop Diary" styleClass="nav-card-title" />
+                        <Label text="Log planting, watering, and harvesting activities." styleClass="nav-card-subtitle" maxWidth="180" wrapText="true" />
+                        <Button text="Open" styleClass="btn-secondary" onAction="#cropDiaryBtn" maxWidth="140" mnemonicParsing="false" />
+                    </VBox>
+
+                    <!-- NEW: Smart Alerts -->
+                    <VBox styleClass="nav-card-animated" alignment="CENTER" spacing="12">
+                        <Label text="🔔" styleClass="nav-card-icon" />
+                        <Label text="Smart Alerts" styleClass="nav-card-title" />
+                        <Label text="Weather warnings and farm notifications." styleClass="nav-card-subtitle" maxWidth="180" wrapText="true" />
+                        <Button text="Open" styleClass="btn-secondary" onAction="#alertsBtn" maxWidth="140" mnemonicParsing="false" />
+                    </VBox>
+
+                    <!-- NEW: Yield History -->
+                    <VBox styleClass="nav-card-animated" alignment="CENTER" spacing="12">
+                        <Label text="📊" styleClass="nav-card-icon" />
+                        <Label text="Yield History" styleClass="nav-card-title" />
+                        <Label text="Track and visualize your harvest performance over time." styleClass="nav-card-subtitle" maxWidth="180" wrapText="true" />
+                        <Button text="Open" styleClass="btn-secondary" onAction="#yieldHistoryBtn" maxWidth="140" mnemonicParsing="false" />
+                    </VBox>
+
+                    <!-- NEW: Export Report -->
+                    <VBox styleClass="nav-card-animated" alignment="CENTER" spacing="12">
+                        <Label text="📤" styleClass="nav-card-icon" />
+                        <Label text="Export Report" styleClass="nav-card-title" />
+                        <Label text="Download a comprehensive farm summary report." styleClass="nav-card-subtitle" maxWidth="180" wrapText="true" />
+                        <Button text="Open" styleClass="btn-secondary" onAction="#exportReportBtn" maxWidth="140" mnemonicParsing="false" />
+                    </VBox>
+
+                </FlowPane>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <!-- ── BOTTOM STATUS BAR ── -->
+    <bottom>
+        <HBox
+            styleClass="topbar"
+            alignment="CENTER"
+            style="-fx-border-color: #30363d transparent transparent transparent; -fx-border-width: 1 0 0 0;">
+            <Label text="🌿 Agricultural Intelligence Hub — All systems operational" styleClass="text-small" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

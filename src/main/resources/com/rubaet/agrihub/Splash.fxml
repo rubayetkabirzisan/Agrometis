@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane
+    prefWidth="600.0"
+    prefHeight="360.0"
+    styleClass="app-root"
+    stylesheets="@styles/application.css"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.rubaet.agrihub.SplashController">
+
+    <!-- Centered content -->
+    <VBox alignment="CENTER" spacing="20">
+        <Label text="🌿" style="-fx-font-size: 64px;" />
+        <Label text="Agricultural Intelligence Hub" styleClass="splash-title" />
+        <Label text="Powered by Google Gemini AI" styleClass="splash-subtitle" />
+        <ProgressBar
+            fx:id="loadingBar"
+            styleClass="progress-bar-green"
+            prefWidth="300"
+            progress="0.0" />
+        <Label fx:id="statusLabel" text="Initializing..." styleClass="splash-status" />
+    </VBox>
+
+</StackPane>

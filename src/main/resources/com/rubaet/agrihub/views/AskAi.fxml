@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+  AskAi.fxml — Agricultural AI Chat Interface (Phase 5A: with conversation memory)
+  Controller: com.rubaet.agrihub.ui.ai.AskAi
+  All fx:id bindings: chatHistory, userInput, sendButton
+  Methods: #sendMessage, #goHome, #quickAsk
+-->
+<BorderPane
+    prefWidth="1200.0"
+    prefHeight="760.0"
+    styleClass="app-root"
+    stylesheets="@../styles/application.css"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.rubaet.agrihub.ui.ai.AskAi">
+
+    <!-- ── TOP BAR ── -->
+    <top>
+        <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+            <Button
+                text="← Back"
+                styleClass="btn-ghost"
+                onAction="#goHome"
+                mnemonicParsing="false" />
+            <Label text="🤖" style="-fx-font-size: 20px;" />
+            <VBox spacing="2">
+                <Label text="AgriBot — AI Agricultural Expert" styleClass="text-page-title" />
+                <Label text="Ask anything about farming, crops, soil, and pests." styleClass="text-muted" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="● Remembers your conversation" styleClass="badge-success" />
+        </HBox>
+    </top>
+
+    <!-- ── CENTER: Chat history ── -->
+    <center>
+        <VBox style="-fx-padding: 0 24 0 24;" VBox.vgrow="ALWAYS">
+            <TextArea
+                fx:id="chatHistory"
+                styleClass="chat-area"
+                VBox.vgrow="ALWAYS"
+                editable="false"
+                wrapText="true" />
+        </VBox>
+    </center>
+
+    <!-- ── BOTTOM: Quick actions + input row ── -->
+    <bottom>
+        <VBox
+            style="-fx-background-color: #161b22; -fx-border-color: #30363d transparent transparent transparent; -fx-border-width: 1 0 0 0;">
+
+            <!-- Quick action suggestion chips -->
+            <FlowPane
+                hgap="8"
+                vgap="6"
+                style="-fx-padding: 12 24 8 24;">
+                <Label text="Suggested:" styleClass="text-small" />
+                <Button
+                    text="🌾 Best crops for clay soil?"
+                    styleClass="btn-ghost"
+                    onAction="#quickAsk"
+                    userData="What are the best crops to grow in clay soil during monsoon season?"
+                    mnemonicParsing="false"
+                    style="-fx-font-size: 12px; -fx-padding: 4 10 4 10;" />
+                <Button
+                    text="🔬 Identify this disease"
+                    styleClass="btn-ghost"
+                    onAction="#quickAsk"
+                    userData="My rice leaves are turning yellow with brown spots. What disease is this and how do I treat it?"
+                    mnemonicParsing="false"
+                    style="-fx-font-size: 12px; -fx-padding: 4 10 4 10;" />
+                <Button
+                    text="💧 Irrigation advice"
+                    styleClass="btn-ghost"
+                    onAction="#quickAsk"
+                    userData="How often should I irrigate wheat crops in winter with loamy soil?"
+                    mnemonicParsing="false"
+                    style="-fx-font-size: 12px; -fx-padding: 4 10 4 10;" />
+                <Button
+                    text="🌿 Intercropping tips"
+                    styleClass="btn-ghost"
+                    onAction="#quickAsk"
+                    userData="What are the best companion crops to grow alongside rice for maximum yield?"
+                    mnemonicParsing="false"
+                    style="-fx-font-size: 12px; -fx-padding: 4 10 4 10;" />
+            </FlowPane>
+
+            <!-- Chat input row -->
+            <HBox
+                spacing="12"
+                alignment="CENTER"
+                style="-fx-padding: 8 24 16 24;">
+                <javafx.scene.control.ComboBox
+                    fx:id="modeSelector"
+                    styleClass="combo-field"
+                    prefWidth="180" />
+                <TextField
+                    fx:id="userInput"
+                    styleClass="search-box"
+                    promptText="Ask AgriBot anything about farming..."
+                    onAction="#sendMessage"
+                    HBox.hgrow="ALWAYS" />
+                <Button
+                    fx:id="sendButton"
+                    text="Send ▶"
+                    styleClass="btn-accent"
+                    onAction="#sendMessage"
+                    defaultButton="true"
+                    mnemonicParsing="false" />
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>

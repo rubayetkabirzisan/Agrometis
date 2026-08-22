@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+    prefWidth="1200.0" prefHeight="760.0"
+    styleClass="app-root"
+    stylesheets="@../styles/application.css"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.rubaet.agrihub.ui.alerts.AlertsController">
+
+    <!-- ── TOP BAR ── -->
+    <top>
+        <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+            <Button text="← Back" styleClass="btn-ghost" onAction="#goHome" mnemonicParsing="false" />
+            <Label text="🔔" style="-fx-font-size: 20px;" />
+            <VBox spacing="2">
+                <Label text="Smart Alerts" styleClass="text-page-title" />
+                <Label text="Weather warnings and farm notifications." styleClass="text-muted" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="unreadBadge" text="" styleClass="badge-warning" />
+            <Button text="🔄 Refresh" styleClass="btn-ghost" onAction="#refreshAlerts" mnemonicParsing="false" />
+            <Button text="⚡ Test Alert" styleClass="btn-ghost" onAction="#generateTestAlert" mnemonicParsing="false" />
+        </HBox>
+    </top>
+
+    <!-- ── CENTER ── -->
+    <center>
+        <ScrollPane styleClass="scroll-area" fitToWidth="true">
+            <VBox spacing="16" style="-fx-padding: 28 40 28 40;" maxWidth="800">
+                <Label fx:id="statusLabel" text="" styleClass="text-muted" />
+                <VBox fx:id="alertListBox" spacing="12">
+                    <Label text="Loading alerts..." styleClass="text-muted" />
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

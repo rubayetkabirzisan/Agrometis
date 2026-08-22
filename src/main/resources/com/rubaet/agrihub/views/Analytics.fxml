@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+    prefWidth="1200.0"
+    prefHeight="760.0"
+    styleClass="app-root"
+    stylesheets="@../styles/application.css"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.rubaet.agrihub.ui.analytics.AnalyticsController">
+
+    <!-- ── TOP BAR ── -->
+    <top>
+        <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+            <Button text="← Back" styleClass="btn-ghost" onAction="#goHome" mnemonicParsing="false" />
+            <Label text="📈" style="-fx-font-size: 20px;" />
+            <VBox spacing="2">
+                <Label text="Yield &amp; Financial Analytics" styleClass="text-page-title" />
+                <Label text="Estimate yield and projected revenue for your crop." styleClass="text-muted" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label text="💡 2024 Estimated Market Prices" styleClass="badge-info" />
+        </HBox>
+    </top>
+
+    <!-- ── CENTER: Split layout ── -->
+    <center>
+        <ScrollPane styleClass="scroll-area" fitToWidth="true" fitToHeight="true">
+        <HBox spacing="0">
+
+            <!-- ── LEFT: Input Panel ── -->
+            <VBox
+                spacing="24"
+                style="-fx-padding: 28 24 28 28; -fx-pref-width: 320; -fx-min-width: 280; -fx-background-color: #0d1117; -fx-border-color: transparent #30363d transparent transparent; -fx-border-width: 0 1 0 0;">
+
+                <Label text="Crop Parameters" styleClass="text-section" />
+
+                <VBox spacing="8">
+                    <Label text="Crop Name" styleClass="text-muted" />
+                    <TextField fx:id="cropField" styleClass="field-input" promptText="e.g. Rice, Wheat, Corn..." />
+                </VBox>
+
+                <VBox spacing="8">
+                    <Label text="Farm Area (Hectares)" styleClass="text-muted" />
+                    <TextField fx:id="areaField" styleClass="field-input" promptText="e.g. 5.0" />
+                </VBox>
+
+                <VBox spacing="8">
+                    <Label text="Season Quality" styleClass="text-muted" />
+                    <ComboBox
+                        fx:id="seasonSelector"
+                        styleClass="combo-field"
+                        maxWidth="Infinity" />
+                </VBox>
+
+                <Button
+                    fx:id="estimateBtn"
+                    text="📊  Calculate Estimate"
+                    styleClass="btn-primary"
+                    onAction="#calculateEstimate"
+                    maxWidth="Infinity"
+                    mnemonicParsing="false" />
+
+                <Label fx:id="errorLabel" text="" styleClass="text-error" wrapText="true" />
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <!-- Result Cards -->
+                <VBox fx:id="resultsPane" spacing="12" visible="false" managed="false">
+                    <Label text="Results" styleClass="text-section" />
+
+                    <VBox styleClass="farm-stat-card" spacing="4">
+                        <Label text="Estimated Yield" styleClass="text-muted" />
+                        <Label fx:id="yieldLabel" text="—" styleClass="stat-value-green" />
+                    </VBox>
+                    <VBox styleClass="farm-stat-card" spacing="4">
+                        <Label text="Gross Revenue" styleClass="text-muted" />
+                        <Label fx:id="revenueLabel" text="—" styleClass="stat-value-green" />
+                    </VBox>
+                    <VBox styleClass="farm-stat-card" spacing="4">
+                        <Label text="Est. Cost (35%)" styleClass="text-muted" />
+                        <Label fx:id="costLabel" text="—" styleClass="stat-value-warning" />
+                    </VBox>
+                    <VBox styleClass="farm-stat-card" spacing="4">
+                        <Label text="Net Profit" styleClass="text-muted" />
+                        <Label fx:id="profitLabel" text="—" styleClass="stat-value-green" />
+                    </VBox>
+                    <VBox styleClass="farm-stat-card" spacing="4">
+                        <Label text="Profit Margin" styleClass="text-muted" />
+                        <Label fx:id="marginLabel" text="—" styleClass="stat-value-green" />
+                    </VBox>
+                </VBox>
+
+            </VBox>
+
+            <!-- ── RIGHT: Charts Panel ── -->
+            <VBox spacing="20" style="-fx-padding: 28;" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+
+                <!-- Revenue vs Cost Bar Chart -->
+                <BarChart
+                    fx:id="revenueChart"
+                    styleClass="agri-chart"
+                    VBox.vgrow="ALWAYS"
+                    animated="true"
+                    title="Revenue vs Cost Breakdown (USD)">
+                    <xAxis>
+                        <CategoryAxis label="Category" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Amount (USD)" />
+                    </yAxis>
+                </BarChart>
+
+                <!-- Profit Distribution Pie Chart -->
+                <PieChart
+                    fx:id="profitChart"
+                    styleClass="agri-chart"
+                    VBox.vgrow="ALWAYS"
+                    animated="true"
+                    title="Profit Distribution"
+                    labelsVisible="true" />
+
+            </VBox>
+
+        </HBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

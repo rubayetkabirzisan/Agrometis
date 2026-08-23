@@ -1,0 +1,60 @@
+/* ============================================================
+ * variables.css — Agricultural Intelligence Hub Design Tokens
+ * All colors, spacing, radii, and typography constants live here.
+ * Every other CSS file imports from this system.
+ * ============================================================ */
+
+.root {
+    /* ── BRAND PALETTE ─────────────────────────────────────── */
+    -agri-primary:          #22c55e;
+    -agri-primary-hover:    #16a34a;
+    -agri-primary-press:    #15803d;
+    -agri-primary-subtle:   #1a3d2b;  /* tinted bg for primary elements */
+    -agri-primary-muted:    #22c55e40;
+
+    -agri-secondary:        #0ea5e9;  /* sky blue — info/links */
+    -agri-secondary-hover:  #0284c7;
+    -agri-accent:           #f59e0b;  /* amber — AI / highlights */
+    -agri-accent-hover:     #d97706;
+
+    /* ── BACKGROUND LAYERS ─────────────────────────────────── */
+    -agri-bg:               #0d1117;  /* deepest page background */
+    -agri-surface:          #161b22;  /* cards, panels */
+    -agri-surface-2:        #1c2128;  /* elevated surfaces */
+    -agri-surface-3:        #22272e;  /* deepest cards, modals */
+    -agri-sidebar:          #0d1117;  /* sidebar background */
+    -agri-topbar:           #161b22;
+
+    /* ── BORDERS ───────────────────────────────────────────── */
+    -agri-border:           #30363d;
+    -agri-border-subtle:    #21262d;
+    -agri-border-focus:     #22c55e;
+    -agri-border-error:     #f85149;
+
+    /* ── TEXT ──────────────────────────────────────────────── */
+    -agri-text-primary:     #e6edf3;
+    -agri-text-secondary:   #8b949e;
+    -agri-text-muted:       #484f58;
+    -agri-text-on-primary:  #ffffff;
+
+    /* ── SEMANTIC STATUS ───────────────────────────────────── */
+    -agri-success:          #22c55e;
+    -agri-success-bg:       #1a3d2b;
+    -agri-warning:          #f59e0b;
+    -agri-warning-bg:       #3d2e0d;
+    -agri-error:            #f85149;
+    -agri-error-bg:         #3d1414;
+    -agri-info:             #0ea5e9;
+    -agri-info-bg:          #0c2a3d;
+
+    /* ── SPACING SCALE (referenced as literal px in FXML/CSS) ─ */
+    /* xs=4, sm=8, md=12, base=16, lg=24, xl=32, 2xl=40, 3xl=48 */
+
+    /* ── TYPOGRAPHY ────────────────────────────────────────── */
+    -fx-font-family: "System";        /* fallback — Inter loaded in Start.java */
+    -fx-font-size: 14px;
+
+    /* ── FOCUS RING ────────────────────────────────────────── */
+    -fx-focus-color:        #22c55e;
+    -fx-faint-focus-color:  #22c55e40;
+}

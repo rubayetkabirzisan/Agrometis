@@ -1,0 +1,89 @@
+/* ============================================================
+ * application.css — Agricultural Intelligence Hub
+ * MASTER STYLESHEET — loaded once in Start.java via scene.
+ * Imports all modules in the correct cascade order.
+ * ============================================================ */
+
+/* 1. Design tokens first (color vars, spacing, font vars) */
+@import "variables.css";
+
+/* 2. Component library (buttons, cards, inputs, typography) */
+@import "components.css";
+
+/* 3. Animations last (overrides component hover states) */
+@import "animations.css";
+
+/* ─────────────────────────────────────────────────────────────
+ * GLOBAL RESETS
+ * These override AtlantaFX PrimerDark defaults where needed.
+ * ───────────────────────────────────────────────────────────── */
+
+/* Page-level background */
+.root {
+    -fx-background-color: #0d1117;
+    -fx-font-size: 14px;
+}
+
+/* Remove default focus ring (replaced by our custom glow) */
+.button:focused,
+.text-field:focused,
+.password-field:focused,
+.combo-box:focused {
+    -fx-faint-focus-color: transparent;
+}
+
+/* Default label text color in dark theme */
+.label {
+    -fx-text-fill: #e6edf3;
+}
+
+/* Hyperlinks — remove default blue underline styling */
+.hyperlink {
+    -fx-text-fill: #22c55e;
+    -fx-underline: false;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #16a34a;
+    -fx-underline: false;
+}
+
+.hyperlink:visited {
+    -fx-text-fill: #22c55e;
+}
+
+/* Default ScrollPane transparency */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Default ComboBox popup list */
+.combo-box-popup .list-view {
+    -fx-background-color: #1c2128;
+    -fx-border-color: #30363d;
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e6edf3;
+    -fx-padding: 8 12;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #22272e;
+    -fx-text-fill: #e6edf3;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #1a3d2b;
+    -fx-text-fill: #22c55e;
+}

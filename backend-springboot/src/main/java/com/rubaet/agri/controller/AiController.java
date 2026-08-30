@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import reactor.core.publisher.Mono;
+
 
 import java.util.*;
 
@@ -50,34 +50,34 @@ public class AiController {
 
     @PostMapping("/ask")
     @RateLimiter(name = "ai-endpoint", fallbackMethod = "rateLimitFallback")
-    public Mono<String> askAi(@Valid @RequestBody AiRequest request, Authentication auth) {
+    public String askAi(@Valid @RequestBody AiRequest request, Authentication auth) {
         String systemInstruction = GENERAL_SYSTEM_INSTRUCTION + buildFarmContext(auth);
-        return Mono.just(callGemini(request, systemInstruction));
+        return callGemini(request, systemInstruction);
     }
 
     @PostMapping("/plan-crop")
     @RateLimiter(name = "ai-endpoint", fallbackMethod = "rateLimitFallback")
-    public Mono<String> planCrop(@Valid @RequestBody AiRequest request, Authentication auth) {
+    public String planCrop(@Valid @RequestBody AiRequest request, Authentication auth) {
         String agronomistInstruction =
             "You are an expert Agronomist. Recommend two suitable main crops and an intercropping strategy " +
             "based on the provided season, soil, and region. Structure your response clearly with sections. " +
             "Keep responses practical, concise, and farmer-friendly. Do not use markdown asterisks or hashtags.";
-        return Mono.just(callGemini(request, agronomistInstruction + buildFarmContext(auth)));
+        return callGemini(request, agronomistInstruction + buildFarmContext(auth));
     }
 
     @PostMapping("/identify-disease")
     @RateLimiter(name = "ai-endpoint", fallbackMethod = "rateLimitFallback")
-    public Mono<String> identifyDisease(@Valid @RequestBody AiRequest request, Authentication auth) {
+    public String identifyDisease(@Valid @RequestBody AiRequest request, Authentication auth) {
         String pathologistInstruction =
             "You are an expert Plant Pathologist. Identify the most likely disease from the provided symptoms, " +
             "and provide clear treatment and prevention steps. Structure your response clearly with sections. " +
             "Keep responses practical, concise, and farmer-friendly. Do not use markdown asterisks or hashtags.";
-        return Mono.just(callGemini(request, pathologistInstruction + buildFarmContext(auth)));
+        return callGemini(request, pathologistInstruction + buildFarmContext(auth));
     }
 
     /** Fallback method invoked when rate limit is exceeded. */
-    public Mono<String> rateLimitFallback(AiRequest request, Authentication auth, Exception ex) {
-        return Mono.just("{ \"title\": \"Rate Limit Exceeded\", \"detail\": \"You have sent too many requests. Please wait a minute before trying again.\" }");
+    public String rateLimitFallback(AiRequest request, Authentication auth, Exception ex) {
+        return "{ \"title\": \"Rate Limit Exceeded\", \"detail\": \"You have sent too many requests. Please wait a minute before trying again.\" }";
     }
 
     /** Builds a farm context string by resolving the authenticated user's FarmProfile. */

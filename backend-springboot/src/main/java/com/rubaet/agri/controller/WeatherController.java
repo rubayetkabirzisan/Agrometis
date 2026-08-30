@@ -2,9 +2,8 @@ package com.rubaet.agri.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("${app.api.base-path}/weather")
@@ -16,20 +15,20 @@ public class WeatherController {
     @Value("${app.weather.base-url}")
     private String baseUrl;
 
-    private final WebClient webClient;
+    private final RestTemplate restTemplate;
 
-    public WeatherController(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.build();
+    public WeatherController() {
+        this.restTemplate = new RestTemplate();
     }
 
     @GetMapping
-    public Mono<String> getWeather(@RequestParam String city) {
+    public String getWeather(@RequestParam String city) {
         if ("demo_key".equals(apiKey)) {
             try {
                 String mockData = java.nio.file.Files.readString(java.nio.file.Paths.get("../next30days.json"));
-                return Mono.just(mockData);
+                return mockData;
             } catch (Exception e) {
-                e.printStackTrace();
+                // Fallback handled below
             }
         }
 
@@ -39,11 +38,7 @@ public class WeatherController {
                 .queryParam("appid", apiKey)
                 .encode()
                 .toUriString();
-        
-        return this.webClient.get()
-                .uri(url)
-                .retrieve()
-                .bodyToMono(String.class);
+
+        return restTemplate.getForObject(url, String.class);
     }
 }
-

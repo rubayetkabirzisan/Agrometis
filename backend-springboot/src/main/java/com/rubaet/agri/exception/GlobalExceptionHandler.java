@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
+import org.springframework.web.client.RestClientResponseException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -28,13 +28,11 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
-    @ExceptionHandler(WebClientResponseException.class)
-    public ProblemDetail handleWebClientException(WebClientResponseException ex) {
-        String detail = ex.getResponseBodyAsString();
-        if (detail == null || detail.isEmpty()) {
-            detail = "Error communicating with external service: " + ex.getStatusCode();
-        }
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_GATEWAY, detail);
+    @ExceptionHandler(RestClientResponseException.class)
+    public ProblemDetail handleRestClientException(RestClientResponseException ex) {
+        log.warn("External service error: {} {}", ex.getStatusCode(), ex.getStatusText());
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+            HttpStatus.BAD_GATEWAY, "Error communicating with external service. Please try again later.");
         problemDetail.setTitle("Bad Gateway");
         return problemDetail;
     }
